@@ -18,17 +18,17 @@
 
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input type="email" placeholder="Email" name="email" clearInput></ion-input>
+      <ion-input type="email" placeholder="Email" name="email" [(ngModel)]="user.email" clearInput></ion-input>
     </ion-item>
   
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-input type="password" placeholder="Password" name="password" clearInput></ion-input>
+      <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="password" clearInput></ion-input>
     </ion-item>
   
   </ion-list>
   <br>
-  <button ion-button block>Iniciar Sesión</button>
+  <button ion-button block (click)="login()">Iniciar Sesión</button>
   <br>
   <button ion-button block color="secondary" (click)="goToRegistrePage()">Registrar</button>
 </ion-content>

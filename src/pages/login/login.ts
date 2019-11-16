@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { RegistrePage } from '../registre/registre';
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { User } from '../../modal/user';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -16,11 +12,39 @@ import { RegistrePage } from '../registre/registre';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  user = {} as User;
+  password : string;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private afAuth: AngularFireAuth,
+    public loadCtrl: LoadingController,
+    ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  login(){
+    let load = this.loadCtrl.create({
+      content: 'Iniciando Sesión'
+    });
+    load.present();
+    this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.password).then(user=>{
+      if(user){
+        let uid = this.afAuth.auth.currentUser.uid
+        console.log('Usuario listo '+uid);
+        this.navCtrl.setRoot(HomePage).then(()=>{
+          load.dismiss();
+        })
+      }
+    }).catch(e=>{
+      alert(e);
+      console.log(e);
+      load.dismiss();
+    });
   }
 
   goToRegistrePage(){
