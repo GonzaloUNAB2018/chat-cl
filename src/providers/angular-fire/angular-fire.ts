@@ -22,4 +22,12 @@ export class AngularFireProvider {
     this.afDb.database.ref('Users/'+uid+'/Data').set(user);
   }
 
+  public getUserData(uid){
+    return this.afDb.object('Users/'+uid+'/Data')
+  }
+
+  public getContactsList(){
+    return this.afDb.list('Users/');
+  }
+
 }

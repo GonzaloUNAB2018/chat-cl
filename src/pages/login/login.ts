@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 import { RegistrePage } from '../registre/registre';
 import { User } from '../../modal/user';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -14,17 +14,20 @@ export class LoginPage {
 
   user = {} as User;
   password : string;
+  uid: string;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private afAuth: AngularFireAuth,
     public loadCtrl: LoadingController,
+    private menuCtrl: MenuController
     ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    this.menuCtrl.enable(false);
   }
 
   login(){
@@ -34,8 +37,8 @@ export class LoginPage {
     load.present();
     this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.password).then(user=>{
       if(user){
-        let uid = this.afAuth.auth.currentUser.uid
-        console.log('Usuario listo '+uid);
+        this.uid = this.afAuth.auth.currentUser.uid
+        console.log('Usuario listo '+this.uid);
         this.navCtrl.setRoot(HomePage).then(()=>{
           load.dismiss();
         })
