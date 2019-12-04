@@ -3,6 +3,7 @@ import { NavController, MenuController } from 'ionic-angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LoginPage } from '../login/login';
 import { AngularFireProvider } from '../../providers/angular-fire/angular-fire';
+import { PaginaChatPage } from '../pagina-chat/pagina-chat';
 
 @Component({
   selector: 'page-home',
@@ -40,6 +41,10 @@ export class HomePage {
         console.log(this.contacts);
       }
     })
+  }
+
+  openChat(){
+    this.navCtrl.push(PaginaChatPage);
   }
 
 }

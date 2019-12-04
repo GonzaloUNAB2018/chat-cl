@@ -8,6 +8,11 @@
 
   <ion-navbar>
     <ion-title>Perfil</ion-title>
+    <ion-buttons end>
+      <button id="logout_btn">
+        <ion-icon id="my_ion-icon" name="create" icon-only (click)="editarPerfil()"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -27,5 +32,6 @@
       <div item-end><p class="perfil"> {{ ( user | async )?. phone}} </p></div>
     </ion-item>
   </ion-list>
+
 
 </ion-content>

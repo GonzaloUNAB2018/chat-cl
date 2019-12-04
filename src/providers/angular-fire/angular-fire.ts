@@ -22,6 +22,10 @@ export class AngularFireProvider {
     this.afDb.database.ref('Users/'+uid+'/Data').set(user);
   }
 
+  public editUserData(uid, user){
+    this.afDb.database.ref('Users/'+uid+'/Data').update(user);
+  }
+
   public getUserData(uid){
     return this.afDb.object('Users/'+uid+'/Data')
   }

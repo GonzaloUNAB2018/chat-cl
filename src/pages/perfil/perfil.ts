@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
 import { AngularFireProvider } from '../../providers/angular-fire/angular-fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
+import { EditarPerfilPage } from '../editar-perfil/editar-perfil';
 
 /**
  * Generated class for the PerfilPage page.
@@ -41,6 +42,10 @@ export class PerfilPage {
 
   getPersonalUserData(){
     this.user = this.afProvider.getUserData(this.uid).valueChanges()
+  }
+
+  editarPerfil(){
+    this.navCtrl.push(EditarPerfilPage, {uid: this.uid});
   }
 
 }

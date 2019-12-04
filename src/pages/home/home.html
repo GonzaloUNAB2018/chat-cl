@@ -3,10 +3,10 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title class="my_title">Home</ion-title>
     <ion-buttons end>
-      <button>
-        <ion-icon name="log-out" icon-only (click)="logout()"></ion-icon>
+      <button id="logout_btn">
+        <ion-icon id="my_ion-icon" name="log-out" icon-only (click)="logout()"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -14,8 +14,8 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let contact of contacts">
+    <button ion-item *ngFor="let contact of contacts" (click)="openChat()">
       <p item-start>{{contact.Data.name}} {{contact.Data.surname}}</p> - <p item-end>{{contact.Data.email}}</p>
-    </ion-item>
+    </button>
   </ion-list>
 </ion-content>

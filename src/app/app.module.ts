@@ -20,6 +20,9 @@ import { LoginPage } from '../pages/login/login';
 import { RegistrePage } from '../pages/registre/registre';
 import { HttpClientModule } from '@angular/common/http';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { EditarPerfilPage } from '../pages/editar-perfil/editar-perfil';
+import { PaginaChatPage } from '../pages/pagina-chat/pagina-chat';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { PerfilPage } from '../pages/perfil/perfil';
     ListPage,
     LoginPage,
     RegistrePage,
-    PerfilPage
+    PerfilPage,
+    EditarPerfilPage,
+    PaginaChatPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,9 @@ import { PerfilPage } from '../pages/perfil/perfil';
     ListPage,
     LoginPage,
     RegistrePage,
-    PerfilPage
+    PerfilPage,
+    EditarPerfilPage,
+    PaginaChatPage
   ],
   providers: [
     StatusBar,
