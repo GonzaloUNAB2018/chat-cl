@@ -3,4 +3,5 @@ export class User {
     surname: string;
     email: string;
     phone: string;
+    id: number;
 }

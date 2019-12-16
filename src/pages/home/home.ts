@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
+import { NavController, MenuController, LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LoginPage } from '../login/login';
 import { AngularFireProvider } from '../../providers/angular-fire/angular-fire';
@@ -12,19 +12,29 @@ import { PaginaChatPage } from '../pagina-chat/pagina-chat';
 export class HomePage {
 
   contacts = [];
+  contactos = [];
+  user : any;
+  uid : any;
 
   constructor(
     public navCtrl: NavController,
     private afAuth: AngularFireAuth,
     private menuCtrl: MenuController,
-    private afProvider: AngularFireProvider
+    private afProvider: AngularFireProvider,
+    private loadingCtrl: LoadingController
     ) {
+      this.uid = this.afAuth.auth.currentUser.uid;
+      this.afProvider.getUserData(this.uid).valueChanges().subscribe(user=>{
+        this.user = user;
+        console.log(this.user)
+        this.getContactsListFromDB(this.user.id);
+      })
 
   }
 
   ionViewDidLoad(){
     this.menuCtrl.enable(true);
-    this.getContactsListFromDB();
+    
   }
 
   logout(){
@@ -33,18 +43,34 @@ export class HomePage {
     })
   }
 
-  getContactsListFromDB(){
+  getContactsListFromDB(id){
+    let load = this.loadingCtrl.create({
+      content : 'Cagando Usuarios'
+    });
+    load.present()
     this.afProvider.getContactsList().valueChanges().subscribe(users=>{
-      console.log(users)
       this.contacts = users;
-      if(this.contacts){
-        console.log(this.contacts);
+      this.contactos = this.contacts.filter((user)=>user.Data.id != id);
+      if(this.contactos){
+        console.log(this.contactos);
+        load.dismiss();
       }
     })
   }
 
-  openChat(){
-    this.navCtrl.push(PaginaChatPage);
+  openChat(id){
+    console.log(id);
+    if(id === undefined){
+      id = Date.now();
+      this.toChatPage(id)
+    }else{
+      id = id;
+      this.toChatPage(id)
+    }
+  }
+
+  toChatPage(id){
+    this.navCtrl.push(PaginaChatPage, {id:id});
   }
 
 }

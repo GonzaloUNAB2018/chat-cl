@@ -42,6 +42,7 @@ export class RegistrePage {
         if(user){
           this.uid = this.afAuth.auth.currentUser.uid;
           console.log(this.uid);
+          this.user.id = Date.now();
           this.afProvider.createNewUser(this.uid, this.user);
           load.dismiss();
           load.onDidDismiss(()=>{

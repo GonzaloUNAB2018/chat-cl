@@ -34,4 +34,10 @@ export class AngularFireProvider {
     return this.afDb.list('Users/');
   }
 
+  public createNewChat(chat, user, other_user){
+    this.afDb.database.ref('Chats/'+chat.id).set(chat);
+    this.afDb.database.ref('Users/'+user.uid+'/Chat').update(user);
+    this.afDb.database.ref('Users/'+other_user.uid+'/Chat').update(other_user);
+  }
+
 }
