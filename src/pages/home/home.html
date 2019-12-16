@@ -14,7 +14,7 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let contacto of contactos" (click)="openChat(contacto.Data.id)">
+    <button ion-item *ngFor="let contacto of contactos" (click)="openChat(contacto.Chat.id)">
       <p item-start>{{contacto.Data.name}} {{contacto.Data.surname}}</p> <p item-end>{{contacto.Data.email}}</p>
     </button>
   </ion-list>

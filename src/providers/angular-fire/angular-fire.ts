@@ -11,6 +11,11 @@ import { AngularFireDatabase } from '@angular/fire/database';
 @Injectable()
 export class AngularFireProvider {
 
+  chat = {
+    id : null,
+    description : 'Chats con los diferentes usuarios.'
+  }
+
   constructor(
     public http: HttpClient,
     private afDb: AngularFireDatabase
@@ -19,7 +24,10 @@ export class AngularFireProvider {
   }
 
   public createNewUser(uid, user){
+    this.chat.id = Date.now();
     this.afDb.database.ref('Users/'+uid+'/Data').set(user);
+    this.afDb.database.ref('Users/'+uid+'/Chats').set(this.chat);
+    this.afDb.database.ref('Chats/'+user.id).set(this.chat);
   }
 
   public editUserData(uid, user){

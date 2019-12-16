@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireProvider } from '../../providers/angular-fire/angular-fire';
 
 /**
  * Generated class for the PaginaChatPage page.
@@ -18,12 +19,15 @@ export class PaginaChatPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    
+    private afProvider: AngularFireProvider
     ) {
+      this.afProvider
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PaginaChatPage');
   }
+
+
 
 }

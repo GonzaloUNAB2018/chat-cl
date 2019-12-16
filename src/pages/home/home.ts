@@ -60,13 +60,13 @@ export class HomePage {
 
   openChat(id){
     console.log(id);
-    if(id === undefined){
+    /*if(id === undefined){
       id = Date.now();
       this.toChatPage(id)
     }else{
       id = id;
       this.toChatPage(id)
-    }
+    }*/
   }
 
   toChatPage(id){
