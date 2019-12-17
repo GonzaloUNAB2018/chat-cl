@@ -14,35 +14,45 @@
 
 
 <ion-content padding>
-  <ion-list>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
+        <ion-list>
     
-    <ion-item>
-      <ion-label floating>Nombre</ion-label>
-      <ion-input type="text" placeholder="Nombre" name="name" clearInput [(ngModel)]="user.name"></ion-input>
-    </ion-item>
+          <ion-item>
+            <ion-label floating>Nombre</ion-label>
+            <ion-input type="text" placeholder="Nombre" name="name" clearInput [(ngModel)]="user.name"></ion-input>
+          </ion-item>
+              
+          <ion-item>
+            <ion-label floating>Apellido</ion-label>
+            <ion-input type="text" placeholder="Apellido" name="surname" clearInput [(ngModel)]="user.surname"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" placeholder="Email" name="email" clearInput [(ngModel)]="user.email"></ion-input>
+          </ion-item>
         
-    <ion-item>
-      <ion-label floating>Apellido</ion-label>
-      <ion-input type="text" placeholder="Apellido" name="surname" clearInput [(ngModel)]="user.surname"></ion-input>
-    </ion-item>
+          <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" placeholder="Password" name="password" clearInput [(ngModel)]="password"></ion-input>
+          </ion-item>
 
-    <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input type="email" placeholder="Email" name="email" clearInput [(ngModel)]="user.email"></ion-input>
-    </ion-item>
+          <ion-item>
+            <ion-label floating>Confirmar Password</ion-label>
+            <ion-input type="password" placeholder="Confirmar Password" name="c_password" clearInput [(ngModel)]="c_password"></ion-input>
+          </ion-item>
+        
+        </ion-list>
+
+        <button ion-button block (click)="signUp()">Registro Usuario</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
   
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" placeholder="Password" name="password" clearInput [(ngModel)]="password"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>Confirmar Password</ion-label>
-      <ion-input type="password" placeholder="Confirmar Password" name="c_password" clearInput [(ngModel)]="c_password"></ion-input>
-    </ion-item>
-  
-  </ion-list>
-
-  <button ion-button block (click)="signUp()">Registro Usuario</button>
 
 </ion-content>

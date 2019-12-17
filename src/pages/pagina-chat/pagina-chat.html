@@ -7,19 +7,43 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>PaginaChat</ion-title>
+    <ion-title>Chat con {{user.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
+        <div *ngFor="let message of messages" >
+          <ion-card [ngClass]="message.from === user.id ? 'one': 'two'">
+            <ion-card-content>
+              <p class="message"> {{message.content}} </p>
+              <p class="hr"> {{message.hr}} </p>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+  
 </ion-content>
 
 <ion-footer>
-  <ion-item>
-    <ion-input item-start [(ngModel)]="message.content"></ion-input>
-    <button ion-button item-end (click)="newMessage()">SEND</button>
-  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
+        <ion-item>
+          <ion-textarea [(ngModel)]="message.content" type="text" max="1000"></ion-textarea>
+          <button ion-button item-end (click)="newMessage()">SEND</button>
+        </ion-item>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-footer>

@@ -58,8 +58,8 @@ export class HomePage {
     })
   }
 
-  openChat(id_other){
-    this.navCtrl.push(PaginaChatPage, {id_other:id_other, uid:this.uid, id: this.user.id});
+  openChat(id_other, name_other){
+    this.navCtrl.push(PaginaChatPage, {id_other:id_other, uid:this.uid, id: this.user.id, name:name_other});
   }
 
 }

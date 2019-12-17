@@ -50,22 +50,24 @@ export class AngularFireProvider {
     return this.afDb.list('Users/');
   }
 
-  public createNewChat(chat, user, other_user){
-    this.afDb.database.ref('Chats/'+chat.id).set(chat);
-    this.afDb.database.ref('Users/'+user.uid+'/Chat').update(user);
-    this.afDb.database.ref('Users/'+other_user.uid+'/Chat').update(other_user);
+  public getChat(chat_id){
+    return this.afDb.list('Chats/'+chat_id+'/Messages');
   }
 
-  public getChat(uid){
-    return this.afDb.list('Users/'+uid+'/Chats/Chat-room');
+  public getChatData(chat_id){
+    return this.afDb.object('Chats/'+chat_id+'/data')
   }
-
-  public getMessages(chat_id){
-    return this.afDb.list('Chats/'+chat_id);
+  
+  public createChatRoom(chat_data){
+    this.afDb.database.ref('Chats/'+chat_data.data.id).set(chat_data);
   }
 
   public newMessage(chat_id, message){
-    this.afDb.database.ref('Chats/'+chat_id).set(message)
+    this.afDb.database.ref('Chats/'+chat_id+'/messages/'+message.id).set(message)
+  }
+
+  public getMessages(chat_id){
+    return this.afDb.list('Chats/'+chat_id+'/messages/');
   }
 
 }

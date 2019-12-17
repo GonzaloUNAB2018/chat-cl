@@ -14,21 +14,30 @@
 
 
 <ion-content padding>
-  <ion-list>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
+        <ion-list>
 
-    <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input type="email" placeholder="Email" name="email" [(ngModel)]="user.email" clearInput></ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="password" clearInput></ion-input>
-    </ion-item>
-  
-  </ion-list>
-  <br>
-  <button ion-button block (click)="login()">Iniciar Sesión</button>
-  <br>
-  <button ion-button block color="secondary" (click)="goToRegistrePage()">Registrar</button>
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" placeholder="Email" name="email" [(ngModel)]="user.email" clearInput></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="password" clearInput></ion-input>
+          </ion-item>
+        
+        </ion-list>
+        <br>
+        <button ion-button block (click)="login()">Iniciar Sesión</button>
+        <br>
+        <button ion-button block color="secondary" (click)="goToRegistrePage()">Registrar</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
