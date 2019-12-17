@@ -16,6 +16,14 @@ export class AngularFireProvider {
     description : 'Chats con los diferentes usuarios.'
   }
 
+  new_chat = {
+    id : null,
+    id_other : null,
+    messages : {
+
+    }
+  }
+
   constructor(
     public http: HttpClient,
     private afDb: AngularFireDatabase
@@ -27,7 +35,7 @@ export class AngularFireProvider {
     this.chat.id = Date.now();
     this.afDb.database.ref('Users/'+uid+'/Data').set(user);
     this.afDb.database.ref('Users/'+uid+'/Chats').set(this.chat);
-    this.afDb.database.ref('Chats/'+user.id).set(this.chat);
+    //this.afDb.database.ref('Chats/'+user.id).set(this.chat);
   }
 
   public editUserData(uid, user){
@@ -46,6 +54,18 @@ export class AngularFireProvider {
     this.afDb.database.ref('Chats/'+chat.id).set(chat);
     this.afDb.database.ref('Users/'+user.uid+'/Chat').update(user);
     this.afDb.database.ref('Users/'+other_user.uid+'/Chat').update(other_user);
+  }
+
+  public getChat(uid){
+    return this.afDb.list('Users/'+uid+'/Chats/Chat-room');
+  }
+
+  public getMessages(chat_id){
+    return this.afDb.list('Chats/'+chat_id);
+  }
+
+  public newMessage(chat_id, message){
+    this.afDb.database.ref('Chats/'+chat_id).set(message)
   }
 
 }

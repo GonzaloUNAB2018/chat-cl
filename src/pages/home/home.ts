@@ -58,19 +58,8 @@ export class HomePage {
     })
   }
 
-  openChat(id){
-    console.log(id);
-    /*if(id === undefined){
-      id = Date.now();
-      this.toChatPage(id)
-    }else{
-      id = id;
-      this.toChatPage(id)
-    }*/
-  }
-
-  toChatPage(id){
-    this.navCtrl.push(PaginaChatPage, {id:id});
+  openChat(id_other){
+    this.navCtrl.push(PaginaChatPage, {id_other:id_other, uid:this.uid, id: this.user.id});
   }
 
 }

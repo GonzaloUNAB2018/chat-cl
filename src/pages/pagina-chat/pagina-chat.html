@@ -16,3 +16,10 @@
 <ion-content padding>
 
 </ion-content>
+
+<ion-footer>
+  <ion-item>
+    <ion-input item-start [(ngModel)]="message.content"></ion-input>
+    <button ion-button item-end (click)="newMessage()">SEND</button>
+  </ion-item>
+</ion-footer>
