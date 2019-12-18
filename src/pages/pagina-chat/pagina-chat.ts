@@ -3,6 +3,10 @@ import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { AngularFireProvider } from '../../providers/angular-fire/angular-fire';
 import { User } from '../../modal/user';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase/app'; 
+import 'firebase/firestore';
+
+
 
 /**
  * Generated class for the PaginaChatPage page.
@@ -35,13 +39,15 @@ export class PaginaChatPage {
   chat_id_2: string;
   chat_id: string;
 
-  dia = new Date().getDate();
-  mes = new Date().getMonth();
-  ano = new Date().getFullYear();
+  dia : any;
+  mes : any;
+  ano : any;
 
-  hora = new Date().getHours();
-  minutos = new Date().getMinutes();
-  segundos = new Date().getSeconds();
+  hora : any;
+  minutos : any;
+  segundos : any;
+
+  fullDateTime: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -85,7 +91,24 @@ export class PaginaChatPage {
           this.chat_id = chat_data.id;
           this.getAllMessages(this.chat_id);
         }
-      }); 
+      });
+
+
+      let dateNow = firebase.firestore.Timestamp.now()
+      console.log(dateNow);
+      this.dia = new Date(dateNow.toMillis()).getDate();
+      console.log(this.dia);
+      this.mes = new Date(dateNow.toMillis()).getMonth();
+      this.ano = new Date(dateNow.toMillis()).getFullYear();
+      this.hora = new Date(dateNow.toMillis()).getHours();
+      this.minutos = new Date(dateNow.toMillis()).getMinutes();
+      this.segundos = new Date(dateNow.toMillis()).getSeconds();
+      let milisegundos = new Date(dateNow.toMillis()).getMilliseconds();
+
+      //console.log(new Date(this.ano, this.mes, this.dia, this.hora, this.minutos, this.segundos, milisegundos));
+
+      this.fullDateTime = new Date(this.ano, this.mes, this.dia, this.hora, this.minutos, this.segundos, milisegundos);
+
       
   }
 
@@ -123,6 +146,8 @@ export class PaginaChatPage {
 
 
   newMessage(){
+    let id = firebase.firestore.Timestamp.now().toMillis();
+    console.log(id);
     console.log(this.chat_id);
     console.log(this.message.content);
     let fecha = this.dia+'-'+this.mes+'-'+this.ano;
@@ -130,12 +155,12 @@ export class PaginaChatPage {
     console.log(fecha, hora)
     this.message.date = fecha;
     this.message.hr = hora;
-    this.message.fullDate = hora+' '+fecha;
+    this.message.fullDate = this.fullDateTime;
     if((this.message.content === null)||(this.message.content === '')){
       console.log('No se envía mensaje')
     }else{
       this.message.from = this.user.id;
-      this.message.id = Date.now();
+      this.message.id = id
       console.log(this.message.date);
       this.afProvider.newMessage(this.chat_id, this.message);
       this.message.content = null;
@@ -143,6 +168,5 @@ export class PaginaChatPage {
     }
     this.scrollToBottom();
   }
-
 
 }
